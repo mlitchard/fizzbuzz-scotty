@@ -1,0 +1,79 @@
+name:                fizzbuzz-scotty
+version:             0.1.0.0
+synopsis:            fizzbuzz json service
+description:         Please see README.md
+homepage:            http://github.com/githubuser/fizzbuzz-scotty#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Michael Litchard
+maintainer:          michael@schmong.org
+copyright:           2015 Michael Litchard
+category:            Web
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+
+  ghc-options:      -Wall
+
+  exposed-modules:     Interface
+                     , FizzTypes
+                     , FizzBuzz
+
+  other-modules:       FizzUtils 
+
+  other-extensions: DeriveGeneric
+                    TemplateHaskell
+                    MonadComprehensions
+                    OverloadedStrings
+
+  build-depends:       base >= 4.7 && < 5
+                     , aeson
+                     , scotty
+                     , wai
+                     , primes     
+                     , semigroups 
+                     , MissingH  
+                     , bytestring
+                     , text       
+                     , either
+                     , http-types                        
+
+  default-language:    Haskell2010
+
+executable fizzbuzz-scotty-exe
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -Wall -threaded -O2 -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , fizzbuzz-scotty
+  default-language:    Haskell2010
+
+test-suite fizzbuzz-scotty-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+
+
+  ghc-options:      -Wall
+  other-extensions: QuasiQuotes
+                    OverloadedStrings
+
+  build-depends:       base
+                     , fizzbuzz-scotty
+                     , scotty
+                     , hspec
+                     , bytestring
+                     , hspec-wai
+                     , hspec-wai-json
+                     , QuickCheck
+                     , primes
+                     , aeson
+  ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/githubuser/fizzbuzz-scotty
